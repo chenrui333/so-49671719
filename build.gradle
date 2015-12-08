@@ -1,0 +1,28 @@
+allprojects {
+    apply plugin: 'java'
+
+    group = 'org.home.spring.mvc'
+    version = '1.0.0'
+
+    targetCompatibility = 1.8
+    sourceCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+project(":mvc-application") {
+    apply plugin: 'war'
+
+    dependencies {
+        compile "org.springframework:spring-core:${springframeworkVersion}"
+        compile "org.springframework:spring-context:${springframeworkVersion}"
+        compile 'javax.inject:javax.inject:1'
+        compile 'edu.washington.cs.types.checker:checker-framework:1.7.0'
+
+        testCompile "org.springframework:spring-test:${springframeworkVersion}"
+        testCompile 'junit:junit:4.12'
+        testCompile 'org.assertj:assertj-core:3.2.0'
+    }
+}
