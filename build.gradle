@@ -8,12 +8,14 @@ allprojects {
     sourceCompatibility = 1.8
 
     repositories {
+        mavenLocal()
         mavenCentral()
     }
 }
 
 project(":mvc-application") {
     apply plugin: 'war'
+    apply plugin: 'jetty'
 
     dependencies {
         compile "org.springframework:spring-core:${springframeworkVersion}"
@@ -22,11 +24,13 @@ project(":mvc-application") {
         compile 'javax.inject:javax.inject:1'
         compile 'edu.washington.cs.types.checker:checker-framework:1.7.0'
 
-        compile 'javax.servlet:servlet-api:2.5'
-        compile 'org.apache.tomcat:tomcat-servlet-api:8.0.30'
+        compile 'javax.servlet:javax.servlet-api:3.1.0'
 
         testCompile "org.springframework:spring-test:${springframeworkVersion}"
         testCompile 'junit:junit:4.12'
         testCompile 'org.assertj:assertj-core:3.2.0'
     }
+
+    stopPort = 9080
+    stopKey = "stop"
 }
