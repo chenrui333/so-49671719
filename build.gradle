@@ -18,8 +18,12 @@ project(":mvc-application") {
     dependencies {
         compile "org.springframework:spring-core:${springframeworkVersion}"
         compile "org.springframework:spring-context:${springframeworkVersion}"
+        compile "org.springframework:spring-webmvc:${springframeworkVersion}"
         compile 'javax.inject:javax.inject:1'
         compile 'edu.washington.cs.types.checker:checker-framework:1.7.0'
+
+        compile 'javax.servlet:servlet-api:2.5'
+        compile 'org.apache.tomcat:tomcat-servlet-api:8.0.30'
 
         testCompile "org.springframework:spring-test:${springframeworkVersion}"
         testCompile 'junit:junit:4.12'
