@@ -1,15 +1,12 @@
 apply plugin: 'java'
 apply plugin: 'war'
-apply plugin: 'jetty'
+apply plugin: 'org.akhikhl.gretty' // jetty 9 with servlet-api 3.0+
 
 group = 'org.home.spring.mvc'
 version = '1.0.0'
 
 targetCompatibility = 1.8
 sourceCompatibility = 1.8
-
-stopPort = 9080
-stopKey = "stop"
 
 repositories {
     mavenLocal()
@@ -20,6 +17,7 @@ dependencies {
     compile "org.springframework:spring-core:${springframeworkVersion}"
     compile "org.springframework:spring-context:${springframeworkVersion}"
     compile "org.springframework:spring-webmvc:${springframeworkVersion}"
+
     compile 'javax.inject:javax.inject:1'
     compile 'edu.washington.cs.types.checker:checker-framework:1.7.0'
 
@@ -28,4 +26,20 @@ dependencies {
     testCompile "org.springframework:spring-test:${springframeworkVersion}"
     testCompile 'junit:junit:4.12'
     testCompile 'org.assertj:assertj-core:3.2.0'
+}
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'org.akhikhl.gretty:gretty:1.2.4'
+    }
+}
+
+gretty {
+    port = 8080
+    contextPath = 'root'
+    servletContainer = 'jetty9'
 }
