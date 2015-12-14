@@ -12,4 +12,4 @@ Template for Spring 4 MVC + JSP view + Annotation configuration, using Gradle bu
 $ git clone https://github.com/aplotnikov/spring-mvc-examples
 $ gradle jettyRun
 ```
-Access ```http://localhost:8080/root/```
+Access ```http://localhost:8080/root/user/home```
