@@ -11,6 +11,7 @@ import java.util.Map;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @Controller
+@RequestMapping("/user")
 public class UserController {
     private final UsersRepository usersRepository;
 
@@ -19,14 +20,14 @@ public class UserController {
         this.usersRepository = usersRepository;
     }
 
-    @RequestMapping(value = "/user/all2", method = GET)
+    @RequestMapping(value = "/all2", method = GET)
     public String users2(Model model) {
         model.addAttribute(usersRepository.findAllUsers());
 
         return "users";
     }
 
-    @RequestMapping(value = "/user/first", method = GET)
+    @RequestMapping(value = "/first", method = GET)
     public String firstUsers(Map model) {
         //noinspection unchecked
         model.put("userList", usersRepository.findAllUsers());
