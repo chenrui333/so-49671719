@@ -6,7 +6,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.servlet.view.InternalResourceView;
 
@@ -15,12 +14,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
 @RunWith(MockitoJUnitRunner.class)
-@WebAppConfiguration
 public class HomeControllerTest {
-    @Mock
-    private UsersRepository usersRepository;
-    @InjectMocks
-    private HomeController  controller;
+    @Mock private        UsersRepository usersRepository;
+    @InjectMocks private HomeController  controller;
 
     @Test
     public void shouldHomePageBeShowed() throws Exception {

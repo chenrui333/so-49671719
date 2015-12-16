@@ -19,10 +19,8 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
 
 @RunWith(MockitoJUnitRunner.class)
 public class AnotherUserControllerTest {
-    @Mock
-    private UsersRepository       usersRepository;
-    @InjectMocks
-    private AnotherUserController controller;
+    @Mock private        UsersRepository       usersRepository;
+    @InjectMocks private AnotherUserController controller;
 
     @Test
     public void shouldUserListBeShown() throws Exception {

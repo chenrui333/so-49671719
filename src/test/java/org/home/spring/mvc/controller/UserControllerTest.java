@@ -23,10 +23,8 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
 
 @RunWith(JUnitParamsRunner.class)
 public class UserControllerTest {
-    @Mock
-    private UsersRepository usersRepository;
-    @InjectMocks
-    private UserController  controller;
+    @Mock private        UsersRepository usersRepository;
+    @InjectMocks private UserController  controller;
 
     @Before
     public void setUp() throws Exception {
