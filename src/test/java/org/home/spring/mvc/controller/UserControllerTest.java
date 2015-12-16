@@ -14,6 +14,7 @@ import org.springframework.web.servlet.view.InternalResourceView;
 
 import static org.hamcrest.core.IsCollectionContaining.hasItems;
 import static org.home.spring.mvc.controller.UserControllerTestHelper.expectedUserList;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -33,10 +34,13 @@ public class UserControllerTest {
 
     @Test
     @Parameters({"/user/all2",
-                 "/user/first"})
+                 "/user/first",
+                 "/user/all?count=20",
+                 "/user/20"})
     @TestCaseName("Should users view be shown when user send request to path {0}")
     public void shouldUserListBeShown(String requestPath) throws Exception {
         when(usersRepository.findAllUsers()).thenReturn(expectedUserList());
+        when(usersRepository.findFirstUsers(anyInt())).thenReturn(expectedUserList());
 
         MockMvc mockMvc = standaloneSetup(controller)
                 .setSingleView(new InternalResourceView("/WEB-INF/views/users.jsp"))
