@@ -14,6 +14,7 @@ import static org.home.spring.mvc.controller.UserControllerTestHelper.expectedUs
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
@@ -31,6 +32,7 @@ public class AnotherUserControllerTest {
                 .build();
 
         mockMvc.perform(get("/users"))
+               .andExpect(status().isOk())
                .andExpect(view().name("users"))
                .andExpect(model().attributeExists("userList"))
                .andExpect(model().attribute("userList", hasItems(expectedUserList().toArray())));

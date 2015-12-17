@@ -10,6 +10,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.servlet.view.InternalResourceView;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
@@ -24,6 +25,8 @@ public class HomeControllerTest {
                 .setSingleView(new InternalResourceView("/WEB-INF/views/home.jsp"))
                 .build();
 
-        mockMvc.perform(get("/home")).andExpect(view().name("home"));
+        mockMvc.perform(get("/home"))
+               .andExpect(status().isOk())
+               .andExpect(view().name("home"));
     }
 }

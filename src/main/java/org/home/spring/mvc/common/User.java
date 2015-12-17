@@ -1,24 +1,42 @@
 package org.home.spring.mvc.common;
 
+import javax.annotation.Nullable;
 import java.util.Objects;
 
 public class User {
-    private final String name;
-    private final String surname;
+    @Nullable private String name;
+    @Nullable private String surname;
 
-    public User(String name, String surname) {
+    public User() {
+        // Need default constructor for unmarshalling object
+        this(null, null);
+    }
+
+    public User(@Nullable String name, @Nullable String surname) {
         this.name = name;
         this.surname = surname;
     }
 
+    @Nullable
     public String getName() {
-        // We need getter for JSP page
+        // Need getter for JSP page
         return name;
     }
 
+    @Nullable
     public String getSurname() {
-        // We need getter for JSP page
+        // Need getter for JSP page
         return surname;
+    }
+
+    public void setName(@Nullable String name) {
+        // Need setter for unmarshalling object
+        this.name = name;
+    }
+
+    public void setSurname(@Nullable String surname) {
+        // Need setter for unmarshalling object
+        this.surname = surname;
     }
 
     @Override
