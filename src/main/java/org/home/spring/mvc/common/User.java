@@ -1,11 +1,17 @@
 package org.home.spring.mvc.common;
 
 import javax.annotation.Nullable;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 public class User {
-    @Nullable private String name;
-    @Nullable private String surname;
+    @NotNull
+    @Size(min = 2, max = 30)
+    private String name;
+    @NotNull
+    @Size(min = 2, max = 30)
+    private String surname;
 
     public User() {
         // Need default constructor for unmarshalling object
@@ -29,12 +35,12 @@ public class User {
         return surname;
     }
 
-    public void setName(@Nullable String name) {
+    public void setName(String name) {
         // Need setter for unmarshalling object
         this.name = name;
     }
 
-    public void setSurname(@Nullable String surname) {
+    public void setSurname(String surname) {
         // Need setter for unmarshalling object
         this.surname = surname;
     }
