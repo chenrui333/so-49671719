@@ -2,10 +2,10 @@ package org.home.spring.mvc.controller;
 
 import org.home.spring.mvc.common.User;
 import org.home.spring.mvc.common.UsersRepository;
+import org.home.spring.mvc.controller.MyExceptionHandler.MyCustomeException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -57,13 +57,6 @@ public class RegisterUserController {
         throw new MyCustomeException();
     }
 
-    @ExceptionHandler(MyCustomeException.class)
-    public String handleMyCustomeException() {
-        return "registerForm";
-    }
-
     @ResponseStatus(value = NOT_FOUND, reason = "User not found")
     private class NotFoundUserException extends RuntimeException {}
-
-    private class MyCustomeException extends RuntimeException {}
 }

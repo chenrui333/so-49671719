@@ -39,6 +39,7 @@ public class RegisterUserControllerTest {
     public void setUp() throws Exception {
         mockMvc = standaloneSetup(controller)
                 .setValidator(validator)
+                .setControllerAdvice(new MyExceptionHandler())
                 .build();
     }
 
