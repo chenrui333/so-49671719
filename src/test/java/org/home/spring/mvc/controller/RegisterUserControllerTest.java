@@ -102,4 +102,11 @@ public class RegisterUserControllerTest {
                .andExpect(view().name("profile"))
                .andExpect(model().attribute("user", user));
     }
+
+    @Test
+    public void shouldExceptionBeHandledAndRegisterViewBeShown() throws Exception {
+        mockMvc.perform(get("/user/throwException"))
+               .andExpect(status().isOk())
+               .andExpect(view().name("registerForm"));
+    }
 }
