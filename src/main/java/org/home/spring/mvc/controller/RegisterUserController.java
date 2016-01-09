@@ -7,10 +7,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
 
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -41,10 +43,14 @@ public class RegisterUserController {
     }
 
     @RequestMapping(value = "/show/{username}", method = GET)
-    public String showSpitterProfile(@PathVariable String username, Model model) {
-        usersRepository.findUserByName(username)
-                       .ifPresent(model::addAttribute);
+    public String showUserProfile(@PathVariable String username, Model model) {
+        User user = usersRepository.findUserByName(username)
+                                   .orElseThrow(NotFoundUserException::new);
+        model.addAttribute(user);
 
         return "profile";
     }
+
+    @ResponseStatus(value = NOT_FOUND, reason = "User not found")
+    private class NotFoundUserException extends RuntimeException {}
 }

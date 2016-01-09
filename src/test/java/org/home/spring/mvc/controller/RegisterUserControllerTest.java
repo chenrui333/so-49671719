@@ -12,6 +12,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import java.util.Optional;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.never;
@@ -19,6 +21,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -78,5 +81,25 @@ public class RegisterUserControllerTest {
                .andExpect(view().name("registerForm"));
 
         verify(usersRepository, never()).save(any(User.class));
+    }
+
+    @Test
+    public void shouldExceptionBeThrownWhenUserIsNotFound() throws Exception {
+        when(usersRepository.findUserByName("Jack")).thenReturn(Optional.empty());
+
+        mockMvc.perform(get("/user/show/Jack"))
+               .andExpect(status().isNotFound())
+               .andExpect(status().reason("User not found"));
+    }
+
+    @Test
+    public void shouldProfileViewBeShownAndUserBeAddedToModelWhenUserIsFound() throws Exception {
+        User user = new User("Jack", "Bauer");
+        when(usersRepository.findUserByName("Jack")).thenReturn(Optional.of(user));
+
+        mockMvc.perform(get("/user/show/Jack"))
+               .andExpect(status().isOk())
+               .andExpect(view().name("profile"))
+               .andExpect(model().attribute("user", user));
     }
 }
