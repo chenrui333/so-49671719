@@ -19,9 +19,11 @@ dependencies {
     compile "org.springframework:spring-context:${springframeworkVersion}"
     compile "org.springframework:spring-webmvc:${springframeworkVersion}"
 
-    compile 'javax.validation:validation-api:1.1.0.Final'
     compile 'javax.inject:javax.inject:1'
     compile 'edu.washington.cs.types.checker:checker-framework:1.7.0'
+
+    compile 'javax.validation:validation-api:1.1.0.Final'
+    compile 'org.hibernate:hibernate-validator:5.2.2.Final'
 
     compile 'javax.servlet:javax.servlet-api:3.1.0'
     compile 'javax.servlet.jsp.jstl:jstl:1.2'
